@@ -1,0 +1,1 @@
+estou tentando organizar meu github, esse é o primerio arquivo de fato que penso antes de sair jogando no github kkkkkkkkkkk

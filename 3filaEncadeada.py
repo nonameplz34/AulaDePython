@@ -1,3 +1,6 @@
+# empurrando pelo terminal vscode, em vez do cmf
+
+
 class Nodo:
     def __init__(self, dado = 0, proximo= None):
         self.dado = dado  
@@ -49,7 +52,8 @@ class fila:
         if self.head():
             print("fila vazia")
             
-        
+            
+            
         # Usando uma pilha para inverter a fila
         pilha = []
         while not self.head():

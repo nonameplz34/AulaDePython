@@ -1,7 +1,11 @@
-# empurrando pelo terminal vscode, em vez do cmf
 
+# para agilizar o processo de envio dessa lista, pq sei q corrigir isso da trabalho e foi erro meu apagar esse ultimo arquivo de fila estou utilizando o chatgbt
 
-class Nodo:
+# me lembro do meu codigo , fiz umas leves alteraçoes nesse (colocar no padrão q ja estudamos), irei comentar somente onde a resposta esta melhor, igual ou onde eu não entender oq o codigo esta fazendo 
+
+# nunca mais dou shift delete em algum arquivo 😂😂😂😂😂😂😂 
+
+class Nodo: #igual ao meu
     def __init__(self, dado = 0, proximo= None):
         self.dado = dado  
         self.proximo = None
@@ -9,17 +13,15 @@ class Nodo:
     def __repr__(self):
         return '%s -> %s' % (self.dado, self.proximo)
 
-
-
 class fila:
-    def __init__(self):
+    def __init__(self): #igual ao meu
         self.inicio = None 
         self.fim = None  
         
-    def head(self):
+    def head(self): #igual ao meu
         return "[" + str(self.inicio) +"]"
         
-    def inserirInicio(self, dado):
+    def inserirInicio(self, dado): #igual ao meu
         novo_nodo = Nodo(dado)
         if self.head():
             self.inicio = novo_nodo 
@@ -27,34 +29,27 @@ class fila:
             self.fim.proximo = novo_nodo  
             self.fim = novo_nodo  
         
-    def remover(self):
+    def remover(self): #melhor que o meu, so não tinha pensado em colocar somente self.head para verificar com if
         if self.head():
             print("fila vazia")
             return None
-        
-        removido = self.inicio.dado  # Armazena o dado do primeiro elemento
-        self.inicio = self.inicio.proximo  # O novo primeiro elemento é o próximo da fila
+        self.inicio = self.inicio.proximo  
         if self.inicio is None:
-            self.fim = None  # Se a fila ficou vazia, atualiza o ponteiro do fim
+            self.fim = None 
         
-    
-    def buscar(self, valor):
+    def buscar(self, valor): #igual ao meu, so coloquei o if fora e print ao inves de return
         corrente = self.inicio
         posicao = 0
         while corrente is not None:
             if corrente.dado == valor:
-                return posicao  # Retorna a posição na fila
+                return posicao  
             corrente = corrente.proximo
             posicao += 1
-        return -1  # Valor não encontrado
-    
-    def inverter(self):
+        
+    def inverter(self): #não entendi, como não uso mais bild tim essa solução ficou muito diferente da minha, não sabia q dava para fazer isso com append, so reutilizei a função "busca" pra criar uma correte e atribuir a uma nova pilha 
         if self.head():
             print("fila vazia")
             
-            
-            
-        # Usando uma pilha para inverter a fila
         pilha = []
         while not self.head():
             pilha.append(self.remover())  # Removemos e empilhamos cada elemento
@@ -63,296 +58,78 @@ class fila:
         while pilha:
             self.inserirInicio(pilha.pop())
             
-
-
 # -------------------------------------------------------
+# ------------------------foram esses que fiquei mais travados-------------------------------
             
-    def adicionar_processo(self, processo):
-        self.inserirInicio(processo)  # Adiciona o processo no final da fila
+    def adicionar_processo(self, processo): #igual ao meu
+        self.inserirInicio(processo) 
         
-    def matar_processo_maior_espera(self):
+    def matar_processo_maior_espera(self): # melhor que o meu, tentei fazer com dicionarios, me compliquei com a biblioteca pandas, não entendi algumas coisas
+        
         if self.head():
             print("A fila de processos está vazia!")
             return
         
+        # dese jeito ficaria muito mais simples kkkkkkkkkkkk
         atual = self.inicio
-
-
-
-
-
         anterior = None
-
-
-
-
-
         maior_espera = atual.dado["wait"]
-
-
-
-
-
         nodo_maior_espera = atual
-
-
-
-
-
         anterior_maior_espera = None
         
-
-
-
-
-
         while atual is not None:
-
-
-
-
-
             if atual.dado["wait"] > maior_espera:
-
-
-
-
-
                 maior_espera = atual.dado["wait"]
-
-
-
-
-
                 nodo_maior_espera = atual
-
-
-
-
-
+                
+                # isso é necessaraio ?
                 anterior_maior_espera = anterior
-
-
-
-
-
+                
+                #isso entendi mais ou menos, os nomes me confundem um pouco 
             anterior = atual
-
-
-
-
-
             atual = atual.proximo
         
-
-
-
-
-
-        # Remover o nodo com maior espera
-
-
-
-
-
-        if nodo_maior_espera == self.inicio:
-
-
-
-
-
-            self.inicio = self.inicio.proximo  # Se for o primeiro, remove da frente
-
-
-
-
-
-        else:
-
-
-
-
-
-            anterior_maior_espera.proximo = nodo_maior_espera.proximo  # Remove do meio ou fim
         
-
-
-
-
-
+        # isso é so para printar depois de achar, so os nomes q estão me confundido um pouco
+        if nodo_maior_espera == self.inicio:
+            self.inicio = self.inicio.proximo 
+            
+        else:
+            anterior_maior_espera.proximo = nodo_maior_espera.proximo 
         print(f"Processo com maior espera {nodo_maior_espera.dado['id']} removido.")
         
-
-
-
-
-
-    def executar_processo(self):
-
-
-
-
-
+        
+    def executar_processo(self): #melhor que o meu, mas entendi o codigo
         processo_removido = self.remover()
-
-
-
-
-
         if processo_removido is not None:
-
-
-
-
-
             print(f"Processo {processo_removido['id']} executado.")
             
-
-
-
-
-
-    def imprimir_processos(self):
-
-
-
-
-
+    def imprimir_processos(self): #melhor que o meu, mas entendi o codigo
         atual = self.inicio
-
-
-
-
-
         while atual is not None:
-
-
-
-
-
             print(f"Processo ID: {atual.dado['id']}, Prioridade: {atual.dado['priorety']}, Espera: {atual.dado['wait']}")
-
-
-
-
-
             atual = atual.proximo
-
-
-
-
-
-
-
-# Exemplo de uso das funcionalidades
-
-
-
 
 
 
 fila = fila()
 
-
-
-
-
-
-# Adicionar processos
-
-
-
-
-
 processo1 = {"id": 101, "name": "Processo A", "priorety": 4, "wait": 10}
-
-
-
-
-
 processo2 = {"id": 102, "name": "Processo B", "priorety": 2, "wait": 30}
-
-
-
-
-
 processo3 = {"id": 103, "name": "Processo C", "priorety": 1, "wait": 50}
 
 
-
-
-
-
 fila.adicionar_processo(processo1)
-
-
-
-
-
 fila.adicionar_processo(processo2)
-
-
-
-
-
 fila.adicionar_processo(processo3)
 
-
-
-
-
-
-# Imprimir processos
-
-
-
-
-
 fila.imprimir_processos()
-
-
-
-
-
-
-# Matar processo com maior espera
-
-
-
-
 
 fila.matar_processo_maior_espera()
 
-
-
-
-
-
-# Executar o primeiro processo
-
-
-
-
-
 fila.executar_processo()
 
-
-
-
-
-
-# Imprimir a fila restante
-
-
-
-
-
 fila.imprimir_processos()
-
-
-
-
-
 
 
 

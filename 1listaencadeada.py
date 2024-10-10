@@ -90,10 +90,6 @@ class listaEncadeada:
                 corrente = corrente.proximo
 
     def teste(self):
-
-
-
-
         corrente = self.cabeca
         
         print(corrente)

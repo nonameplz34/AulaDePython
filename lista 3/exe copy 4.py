@@ -1,0 +1,1 @@
+# 4) Faça uma função recursiva que permita somar os elementos de um vetor de inteiros. 
